@@ -123,7 +123,7 @@
   .frame{
     position:relative;
     width:100%;
-    aspect-ratio:3/4;
+    aspect-ratio:4/5;
     overflow:hidden;
     background:#00000010;
   }
@@ -176,6 +176,191 @@
     color:rgba(251,243,231,0.6);
   }
 
+  /* work detail */
+  .modal-backdrop{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    align-items:center;
+    padding:28px;
+    background:rgba(20,10,4,0,68);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .25s ease, visibility .25s ease;
+  }
+
+  .modal-backdrop.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+  }
+
+  .work-modal{
+    position:relative;
+    width:min(1080px, 100%);
+    max-height:min(820px, calc(100vh - 56px));
+    display:grid;
+    grid-template-columns:minmax(0, 1.08fr) minmax(300px, .92fr);
+    overflow:hidden;
+    background:var(--cream);
+    color:var(--ink);
+    border-radius:4px;
+    box-shadow:0 24px 70px rgba(0,0,0,.48);
+    transform:translateY(18px) scale(.985);
+    transition:transform .28 ease;
+  }
+
+  .modal-backdrop.is-open .work-modal{
+    transform:translateY(0) scale(1);
+  }
+
+  .modal-image-wrap{
+    min-height:520px;
+    background:#18100a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .modal-image{
+    width:100%;
+    height:100%;
+    max-height:calc(100vh - 56px);
+    object-fit:contain;
+    display:block;
+  }
+
+  .modal-info{
+    position:relative;
+    overflow:auto;
+    padding:48px 42px 42px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .modal-number{
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--vermillion-deep);
+    margin-bottom:22px;
+    font-weight:700;
+  }
+
+  .modal-title{
+    margin:0 0 8px;
+    font-size:clamp(28px, 4vw, 46px);
+    line-height:1.02;
+    letter-spacing: -.025em;
+    color:var(--ink);
+  }
+
+  .modal-meta{
+    margin:0 0 30px;
+    font-family:Georgia, "Times New Roman", serif;
+    font-style:italic;
+    font-size:14px;
+    color:#5c4a34;
+  }
+
+  .modal-divider{
+    width:46px;
+    height:3px;
+    margin-bottom:26px;
+    background:var(--vermillion);
+  }
+
+  .modal-description{
+    margin:0;
+    font-size:15px;
+    line-height:1.75;
+    color:#3b2b1b;
+    white-space:pre-line;
+  }
+
+  .modal-close{
+    position:absolute;
+    top:14px;
+    right:14px;
+    z-index:2;
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:var(--cream);
+    color:var(--ink);
+    font-size:24px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.22);
+    transition:transform .2s ease, background .2s ease;
+  }
+
+  .modal-close:hover{
+    transform:scale(1.07);
+    background:#ffffff;
+  }
+
+  figure[role="button"]{
+    cursor:pointer;
+  }
+
+  figure:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:4px;
+  }
+
+  @media (max-width:760px){
+    .modal-backdrop{
+      padding:14px;
+      align-items:center;
+    }
+
+    .work-modal{
+      grid-template-columns:1fr;
+      max-height:calc(100vh - 28px);
+      overflow:auto;
+    }
+
+    .modal-image-wrap{
+      min-height:0;
+      height:min(62vh, 620px);
+    }
+
+    .modal-image{
+      max-height:none;
+    }
+
+    .modal-info{
+      padding:30px 24px 32px;
+    }
+
+    .modal-title{
+      font-size:32px;
+    }
+
+    .modal-close{
+      top:10px;
+      right:10px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .modal-backdrop,
+    .work-modal,
+    .corner-link,
+    figure{
+      transition:none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce){
     figure, .corner-link{ transition:none; }
   }
@@ -184,39 +369,165 @@
 <body>
 
 <header>
-  
+  <a class="corner-link cosmos" href="https://www.cosmos.so/hapisspt" target="_blank" rel="noopener" title="Cosmos profile">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" stroke="#241505" stroke-width="1.6"/>
+      <ellipse cx="12" cy="12" rx="9" ry="3.4" stroke="#241505" stroke-width="1.6"/>
+      <ellipse cx="12" cy="12" rx="3.4" ry="9" stroke="#241505" stroke-width="1.6"/>
+    </svg>
+  </a>
+
   <div class="title-block">
     <span class="eyebrow">PERSONAL CATALOGUE &middot; HAPISSPT</span>
     <h1>Serendipity Archive</h1>
     <p class="subtitle">BEST OF 2026</p>
   </div>
 
+  <a class="corner-link pinterest" href="https://pinterest.com/hapisspt" target="_blank" rel="noopener" title="Pinterest profile">
+    <svg viewBox="0 0 24 24" fill="#241505" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 4.23 2.63 7.85 6.34 9.31-.09-.79-.17-2.01.03-2.88.19-.79 1.23-5.02 1.23-5.02s-.31-.63-.31-1.55c0-1.46.85-2.55 1.9-2.55.9 0 1.33.67 1.33 1.48 0 .9-.57 2.25-.87 3.5-.25 1.04.53 1.9 1.56 1.9 1.87 0 3.31-1.97 3.31-4.82 0-2.52-1.81-4.28-4.4-4.28-3 0-4.76 2.25-4.76 4.57 0 .9.35 1.87.78 2.4a.31.31 0 0 1 .07.3c-.08.33-.26 1.04-.29 1.19-.05.19-.15.24-.35.14-1.31-.61-2.13-2.52-2.13-4.06 0-3.31 2.4-6.35 6.93-6.35 3.64 0 6.47 2.59 6.47 6.06 0 3.62-2.28 6.53-5.45 6.53-1.06 0-2.06-.55-2.4-1.21l-.65 2.49c-.24.9-.87 2.04-1.3 2.73.98.3 2.02.46 3.1.46 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+    </svg>
+  </a>
 </header>
 
 <main>
   <div class="gallery" id="gallery"></div>
 </main>
 
+<div class="modal-backdrop" id="workModal" aria-hidden="true">
+  <section class="work-modal"
+           role="dialog"
+           aria-modal="true"
+           aria-labelledby="modalTitle">
+
+    <button class="modal-close" id="modalClose" type="button" aria-label="Tutup">&times;</button>
+
+    <div class="modal-image-wrap">
+      <img class="modal-image" id="modalImage" src="" alt="">
+    </div>
+
+    <div class="modal-info">
+      <div class="modal-number" id="modalNumber"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-meta" id="modalMeta"></p>
+      <div class="modal-divider"></div>
+      <p class="modal-description" id="modalDescription"></p>
+    </div>
+
+  </section>
+</div>
+
 <footer>SPT &middot; UPTD</footer>
 
 <script>
   const works = [
-    { src: "sankarea.jpg", title: "SANKAREA", medium: "beloved undead", year: "2026" },
-    { src: "hanekawa.jpg", title: "HANEKAWA", medium: "intelligent madamoiselle", year: "2026" },
-    { src: "gentildonna.jpg", title: "GENTILDONNA", medium: "elegance meets performance", year: "2026" },
-    { src: "schooldays.jpg", title: "KATSURA", medium: "contextual", year: "2026" },
-    { src: "bouquetdor.jpg", title: "BOUQUETD'OR", medium: "silver collector", year: "2026" },
-    { src: "marriagetoxin.jpg", title: "KINOSAKI", medium: "steal her looks", year: "2026" },
-    { src: "senjougahara.jpg", title: "HITAGI", medium: "sharp tongue", year: "2026" },
-    { src: "urabe.jpg", title: "URABE", medium: "mysterious", year: "2026" },
-
+    {
+      src: "sankarea.jpg",
+      title: "SANKAREA",
+      medium: "beloved undead",
+      year: "2026",
+      description: "Made with pride and honor for the amazing Sankarea series, yellowish tone with black sillhouette, and a touch of red to represent the undead love star",
+    },
+    {
+      src: "hanekawa.jpg",
+      title: "HANEKAWA",
+      medium: "intelligent mademoiselle",
+      year: "2026",
+      description: "Dedicated poster for the series Kizumonogatari sequel Nekettsu—hen, preserving the greatest character and the most impactful character in the whole series. The main pose is to represent how hungry she was about information.",
+    },
+    {
+      src: "gentildonna.jpg",
+      title: "GENTILDONNA",
+      medium: "elegance meets performance",
+      year: "2026",
+      description: "To celebrate the precious title Triple Tiara Gentildonna has, this dedicated poster is made to represent her elegance and to promote her achivements in racing history.",
+    },
+    {
+      src: "schooldays.jpg",
+      title: "SCHOOLDAYS",
+      medium: "contextual",
+      year: "2026",
+      description: "This poster simply spread awareness that every action has a consequences",
+    },
+    {
+      src: "bouquetdor.jpg",
+      title: "CURREN BOUQUETD'OR",
+      medium: "silver collector",
+      year: "2026",
+      description: "Beauty upon the harsh racetrack, bouquetd'or is showing magnificent performance and shows the world that shes blooming among the giants.",
+    },
+    {
+      src: "marriagetoxin.jpg",
+      title: "KINOSAKI",
+      medium: "steal the looks",
+      year: "2026",
+      description: "Unofficial Marriage Toxin poster, this poster shows how beauty can break your mind.",
+    },
+    {
+      src: "senjougahara.jpg",
+      title: "HITAGI",
+      medium: "sharp tongue",
+      year: "2026",
+      description: "This is not a poster, this is a magazine cover that inspired me to start a little project to make a magazine about how success her marriage is.",
+    },
+    {
+      src: "urabe.jpg",
+      title: "URABE",
+      medium: "mysterious",
+      description: "You can't judge someone by looking at her looks, you need to understand whats behind that hair bangs. Dedicated poster for the series Nazo no Kanojo X or Mysterious Girlfriend X.",
+    }
   ];
 
   const gallery = document.getElementById("gallery");
 
+  const modal = document.getElementById("workModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalNumber = document.getElementById("modalNumber");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalMeta = document.getElementById("modalMeta");
+  const modalDescription = document.getElementById("modalDescription");
+  const modalClose = document.getElementById("modalClose");
+
+  let lastFocusedElement = null;
+
+  function openWork(index){
+    const w = works[index];
+    const num = String(index + 1).padStart(3, "0");
+
+    modalImage.src = w.src;
+    modalImage.alt = w.title;
+    modalNumber.textContent = `Archive No. ${num}`;
+    modalTitle.textContent = w.title;
+    modalMeta.textContent = `${w.medium}, ${w.year}`;
+    modalDescription.textContent = w.description || "Belum ada deskripsi untuk karya ini.";
+
+    lastFocusedElement = document.activeElement;
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    modalClose.focus();
+  }
+
+  function closeWork(){
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+
+    if (lastFocusedElement){
+      lastFocusedElement.focus();
+    }
+  }
+
   works.forEach((w, i) => {
     const num = String(i + 1).padStart(3, "0");
     const fig = document.createElement("figure");
+
+    fig.setAttribute("role", "button");
+    fig.setAttribute("tabindex", "0");
+    fig.setAttribute("aria-label", `Lihat detail ${w.title}`);
+
     fig.innerHTML = `
       <div class="frame">
         <span class="tag">No. ${num}</span>
@@ -227,7 +538,31 @@
         <span class="work-meta">${w.medium}, ${w.year}</span>
       </figcaption>
     `;
+
+    fig.addEventListener("click", () => openWork(i));
+
+    fig.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " "){
+        event.preventDefault();
+        openWork(i);
+      }
+    });
+
     gallery.appendChild(fig);
+  });
+
+  modalClose.addEventListener("click", closeWork);
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal){
+      closeWork();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal.classList.contains("is-open")){
+      closeWork();
+    }
   });
 </script>
 
